@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f3b14a1787685dcb59d013484ea1b33c"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f3b14a1787685dcb59d013484ea1b33c&libraries=services,drawing,clusterer"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>example</title>
 </head>
 <body>
+  <input type="button" onclick="search()" value="검색">
 	<div id="map" style="width:500px;height:400px;"></div>
 	<script>
+    const REST_API_KEY = "0dd0f2eccee7ccb871eaf38e35937e46";
+    const URL = "https://dapi.kakao.com/v2";
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = { 
         center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
@@ -17,6 +21,19 @@
 
 // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
 var map = new kakao.maps.Map(mapContainer, mapOption); 
+    $.ajax({
+      type: "GET",
+      url: URL+"/local/search/address.json",
+      data: {
+        query: "전북 삼성동 100"
+      },
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader("Authorization KakaoAK ", REST_API_KEY);
+      },
+      success: function(res) {
+        document.write(res);
+      }
+    })
   </script>
   
 </body>
