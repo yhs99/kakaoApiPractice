@@ -14,7 +14,7 @@
 	<div id="map" style="width:500px;height:400px;"></div>
 	<script>
     var moveLatLon;
-    const REST_API_KEY = "0dd0f2eccee7ccb871eaf38e35937e46";
+    const REST_API_KEY = "KakaoAK 0dd0f2eccee7ccb871eaf38e35937e46";
     const URL = "https://dapi.kakao.com/v2";
     const NAVI = "https://apis-navi.kakaomobility.com/v1/directions?origin=127.11015314141542,37.39472714688412&destination=127.10824367964793,37.401937080111644&waypoints=&priority=RECOMMEND&car_fuel=GASOLINE&car_hipass=false&alternatives=false&road_details=false";
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -31,7 +31,7 @@
         type: "GET",
         url: NAVI,
         beforeSend: function(xhr) {
-          xhr.setRequestHeader("Authorization KakaoAK ", REST_API_KEY);
+          xhr.setRequestHeader("Authorization", REST_API_KEY);
         },
         success: function(res) {
           console.log(res);
