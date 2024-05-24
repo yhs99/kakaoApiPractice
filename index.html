@@ -34,11 +34,16 @@
           xhr.setRequestHeader("Authorization", REST_API_KEY);
         },
         success: function(res) {
-          console.log(res.routes.sections);
-          var x = res.routes.sections.guides[0].x;
-          var y = res.routes.sections.guides[0].y;
-          var moveLatLon = new kakao.maps.LatLng(x, y);
-          map.panTo(moveLatLon);
+          try {
+            console.log(res.summary);
+          }catch(e) {
+            console.log(e);
+          }finally {
+            var x = res.routes.sections.guides[0].x;
+            var y = res.routes.sections.guides[0].y;
+            var moveLatLon = new kakao.maps.LatLng(x, y);
+            map.panTo(moveLatLon);
+          }
         },
         error: function (xhr, ajaxOptions, thrownError) {
           alert(xhr.status);
