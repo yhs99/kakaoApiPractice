@@ -34,7 +34,7 @@
           xhr.setRequestHeader("Authorization", REST_API_KEY);
         },
         success: function(res) {
-          console.log(res.routes.sections[0].guides);
+          console.log(res.routes.sections.guides);
           var x = res.routes.sections.guides[0].x;
           var y = res.routes.sections.guides[0].y;
           var moveLatLon = new kakao.maps.LatLng(x, y);
