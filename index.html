@@ -35,7 +35,7 @@
         },
         success: function(res) {
           try {
-            var data = JSON.prase(res.routes);
+            var data = JSON.parse(res);
             console.log(data);
             var x = data.sections.guides[0].x;
             var y = data.sections.guides[0].y;
