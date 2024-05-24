@@ -39,6 +39,10 @@
           var y = res.routes[0].origin.y;
           var moveLatLon = new kakao.maps.LatLng(x, y);
           map.panTo(moveLatLon);
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+          alert(xhr.status);
+          alert(thrownError);
         }
       });
     console.log("end ajax");
