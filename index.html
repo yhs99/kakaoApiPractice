@@ -35,6 +35,8 @@
         },
         success: function(res) {
           try {
+            console.log(res);
+            console.log(typeof res);
             var data = JSON.parse(res);
             console.log(data);
             var x = data.sections.guides[0].x;
