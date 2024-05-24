@@ -35,10 +35,10 @@
         },
         success: function(res) {
           try {
-            var data = JSON.prase(res);
+            var data = JSON.prase(res.routes);
             console.log(data);
-            var x = data.routes.sections.guides[0].x;
-            var y = data.routes.sections.guides[0].y;
+            var x = data.sections.guides[0].x;
+            var y = data.sections.guides[0].y;
             var moveLatLon = new kakao.maps.LatLng(x, y);
             map.panTo(moveLatLon);
           }catch(e) {
