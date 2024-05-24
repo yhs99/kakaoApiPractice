@@ -2,6 +2,7 @@
 <html lang="ko">
 <head>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f3b14a1787685dcb59d013484ea1b33c&libraries=services,drawing,clusterer"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,10 +10,13 @@
 </head>
 <body>
   <input type="button" onclick="search()" value="검색">
+  
 	<div id="map" style="width:500px;height:400px;"></div>
 	<script>
+    var moveLatLon;
     const REST_API_KEY = "0dd0f2eccee7ccb871eaf38e35937e46";
     const URL = "https://dapi.kakao.com/v2";
+    const NAVI = "https://apis-navi.kakaomobility.com/v1/directions?origin=127.11015314141542,37.39472714688412&destination=127.10824367964793,37.401937080111644&waypoints=&priority=RECOMMEND&car_fuel=GASOLINE&car_hipass=false&alternatives=false&road_details=false";
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = { 
         center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
@@ -21,19 +25,29 @@
 
 // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
 var map = new kakao.maps.Map(mapContainer, mapOption); 
+  function search() {
     $.ajax({
-      type: "GET",
-      url: URL+"/local/search/address.json",
-      data: {
-        query: "전북 삼성동 100"
-      },
-      beforeSend: function(xhr) {
-        xhr.setRequestHeader("Authorization KakaoAK ", REST_API_KEY);
-      },
-      success: function(res) {
-        document.write(res);
+        type: "GET",
+        url: NAVI,
+        beforeSend: function(xhr) {
+          xhr.setRequestHeader("Authorization KakaoAK ", REST_API_KEY);
+        },
+        success: function(res) {
+          var x = res["routes"][0].origin["x"];
+          var y = res["routes"][0].origin["y"];
+          var moveLatLon = new kakao.maps.LatLng(x, y);
+          map.panTo(moveLatLon);
+        }
+    });
+  }
+  
+  function samplePost() {
+    new daum.Postcode({
+      oncompleate: function(data) {
+        var addr = data.address;
       }
     })
+  }
   </script>
   
 </body>
