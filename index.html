@@ -33,8 +33,9 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
           xhr.setRequestHeader("Authorization KakaoAK ", REST_API_KEY);
         },
         success: function(res) {
-          var x = res["routes"][0].origin["x"];
-          var y = res["routes"][0].origin["y"];
+          console.log(res);
+          var x = res.routes[0].origin.x;
+          var y = res.routes[0].origin.y;
           var moveLatLon = new kakao.maps.LatLng(x, y);
           map.panTo(moveLatLon);
         }
