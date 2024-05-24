@@ -24,8 +24,9 @@
     };
 
 // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-var map = new kakao.maps.Map(mapContainer, mapOption); 
+  var map = new kakao.maps.Map(mapContainer, mapOption); 
   function search() {
+    console.log("start start");
     $.ajax({
         type: "GET",
         url: NAVI,
@@ -39,16 +40,9 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
           var moveLatLon = new kakao.maps.LatLng(x, y);
           map.panTo(moveLatLon);
         }
-    });
-  }
-  
-  function samplePost() {
-    new daum.Postcode({
-      oncompleate: function(data) {
-        var addr = data.address;
-      }
-    })
-  }
+      });
+    console.log("end ajax");
+    }
   </script>
   
 </body>
