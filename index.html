@@ -35,14 +35,14 @@
         },
         success: function(res) {
           try {
-            console.log(res.summary);
-          }catch(e) {
-            console.log(e);
-          }finally {
-            var x = res.routes.sections.guides[0].x;
-            var y = res.routes.sections.guides[0].y;
+            var data = JSON.prase(res);
+            console.log(data);
+            var x = data.routes.sections.guides[0].x;
+            var y = data.routes.sections.guides[0].y;
             var moveLatLon = new kakao.maps.LatLng(x, y);
             map.panTo(moveLatLon);
+          }catch(e) {
+            console.log(e);
           }
         },
         error: function (xhr, ajaxOptions, thrownError) {
