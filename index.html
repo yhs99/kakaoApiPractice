@@ -35,8 +35,8 @@
         },
         success: function(res) {
           console.log(res);
-          var x = res.routes[0].origin.x;
-          var y = res.routes[0].origin.y;
+          var x = res.sections[0].guides[0].x;
+          var y = res.sections[0].guides[0].y;
           var moveLatLon = new kakao.maps.LatLng(x, y);
           map.panTo(moveLatLon);
         },
