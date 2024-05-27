@@ -36,11 +36,9 @@
         success: function(res) {
           try {
             console.log(res);
-            console.log(typeof res);
-            var data = JSON.parse(res);
-            console.log(data);
-            var x = data.sections.guides[0].x;
-            var y = data.sections.guides[0].y;
+            var x = res.routes[0]["summary"]["origin"]["x"];
+            console.log(x);
+            var y = res.routes[0]["summary"]["origin"]["y"];
             var moveLatLon = new kakao.maps.LatLng(x, y);
             map.panTo(moveLatLon);
           }catch(e) {
