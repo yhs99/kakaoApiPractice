@@ -36,9 +36,10 @@
         success: function(res) {
           try {
             console.log(res);
-            var x = res.routes[0]["summary"]["origin"]["x"];
+            var x = Number.routes[0]["summary"]["origin"]["x"];
             console.log(x);
-            var y = res.routes[0]["summary"]["origin"]["y"];
+            var y = Number.routes[0]["summary"]["origin"]["y"];
+            console.log(y);
             var moveLatLon = new kakao.maps.LatLng(x, y);
             map.panTo(moveLatLon);
           }catch(e) {
