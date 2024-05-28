@@ -9,8 +9,17 @@
   <title>example</title>
 </head>
 <body>
-  <input type="button" onclick="search()" value="검색">
-  <div id="sample5_address"></div>
+  <div id="sample5_address">
+    <div id="start">
+      <input type="text" id="startInput" onclick="search(this)" readonly>
+    </div>>
+    <div id="end">
+      <input type="text" id="endInput" onclick="search(this)" readonly>
+    </div>
+    <div id="search">
+      <input type="button" onclick="findRoute()" value="길찾기">
+    </div>
+  </div>
 	<div id="map" style="width:500px;height:400px;"></div>
 	<script>
     var moveLatLon;
@@ -27,22 +36,13 @@
   var map = new kakao.maps.Map(mapContainer, mapOption); 
   var geocoder = new kakao.maps.services.Geocoder();
 
-  function search() {
+  function search(element) {
     console.log("searching..");
     new daum.Postcode({
     oncomplete: function(data) {
       let addr = data.address;
       console.log(data);
-      document.getElementById("sample5_address").value = addr;
-      geocoder.addressSearch(data.address, (results, status) => {
-        if(status === kakao.maps.services.Status.OK) {
-          let result = results[0];
-          console.log(result);
-
-          let coords = new kakao.maps.LatLng(result.y, result.x);
-          map.panTo(coords);
-        }
-      });
+      element.value = data.address;
     }
   }).open();
     // console.log("start start");
@@ -71,6 +71,18 @@
     //     }
     //   });
     // console.log("end ajax");
+    }
+
+    function findRoute() {
+      geocoder.addressSearch(data.address, (results, status) => {
+        if(status === kakao.maps.services.Status.OK) {
+          let result = results[0];
+          console.log(result);
+
+          let coords = new kakao.maps.LatLng(result.y, result.x);
+          map.panTo(coords);
+        }
+      });
     }
   </script>
   
