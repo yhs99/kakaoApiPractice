@@ -74,15 +74,32 @@
     }
 
     function findRoute() {
-      geocoder.addressSearch(data.address, (results, status) => {
-        if(status === kakao.maps.services.Status.OK) {
-          let result = results[0];
-          console.log(result);
-
-          let coords = new kakao.maps.LatLng(result.y, result.x);
-          map.panTo(coords);
+      const direct = `https://apis-navi.kakaomobility.com/v1/directions?origin=${document.getElementById("startInput").value}&destination=${document.getElementById("endInput").value}`
+       $.ajax({
+         type: "GET",
+         url: direct,
+        beforeSend: function(xhr) {
+          xhr.setRequestHeader("Authorization", REST_API_KEY);
+        },
+        success: function(res) {
+          try {
+            console.log(res);
+            var x = routes[0]["summary"]["destination "]["x"];
+            console.log(x);
+            var y = routes[0]["summary"]["destination"]["y"];
+            console.log(y);
+            var moveLatLon = new kakao.maps.LatLng(x, y);
+            map.panTo(moveLatLon);
+          }catch(e) {
+            console.log(e);
+          }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+          alert(xhr.status);
+          alert(thrownError);
         }
       });
+    console.log("end ajax");
     }
   </script>
   
